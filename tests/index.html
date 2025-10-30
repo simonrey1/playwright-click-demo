@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Playwright Auto-Wait Demo</title>
+</head>
+<body>
+    <h1>Auto-Wait Demo</h1>
+    <button id="install-btn" disabled>Install</button>
+
+    <p id="status">Waiting for button to enable...</p>
+
+    <script>
+        const installButton = document.getElementById('install-btn');
+        const statusElement = document.getElementById('status');
+
+        // Simulate a backend process that takes 3 seconds (3000ms) to complete
+        setTimeout(() => {
+            installButton.disabled = false; // Enable the button
+            statusElement.textContent = 'Button is now enabled.';
+        }, 3000);
+
+        installButton.addEventListener('click', () => {
+            statusElement.textContent = 'Button clicked!';
+            installButton.disabled = true;
+        });
+    </script>
+</body>
+</html>
