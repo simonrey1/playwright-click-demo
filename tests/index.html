@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Playwright Auto-Wait Demo</title>
+    <title>Playwright Dual Auto-Wait Demo</title>
+    <style>
+        /* Initially hidden via CSS */
+        #install-btn {
+            display: none; 
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Auto-Wait Demo</h1>
-    <button id="install-btn" disabled>Install</button>
+    <h1>Dual Auto-Wait Demo: Visible (2s) then Enabled (4s)</h1>
+    
+    <button id="install-btn" disabled>Install Now</button>
 
-    <p id="status">Waiting for button to enable...</p>
+    <p id="status">Waiting for the button to appear...</p>
 
     <script>
         const installButton = document.getElementById('install-btn');
         const statusElement = document.getElementById('status');
 
-        // Simulate a backend process that takes 3 seconds (3000ms) to complete
+        // Condition 1: Button becomes VISIBLE after 2 seconds
         setTimeout(() => {
-            installButton.disabled = false; // Enable the button
-            statusElement.textContent = 'Button is now enabled.';
-        }, 3000);
+            installButton.style.display = 'block'; 
+            statusElement.textContent = 'Button is visible, but still disabled.';
+        }, 2000); // 2 seconds
+
+        // Condition 2: Button becomes ENABLED after 4 seconds (2 seconds after being visible)
+        setTimeout(() => {
+            installButton.disabled = false;
+            statusElement.textContent = 'Button is visible AND enabled.';
+        }, 4000); // 4 seconds (this is the last condition to be met)
 
         installButton.addEventListener('click', () => {
             statusElement.textContent = 'Button clicked!';
