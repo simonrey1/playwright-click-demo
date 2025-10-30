@@ -16,7 +16,7 @@ test('Playwright click() automatically waits for the button to be enabled', asyn
   console.log('Attempting click on disabled button. Playwright will start waiting...');
   
   const startTime = Date.now();
-  await installButton.click(); // This line blocks for ~3 seconds
+  await installButton.click();
   const endTime = Date.now();
   
   const waitDuration = (endTime - startTime) / 1000;
